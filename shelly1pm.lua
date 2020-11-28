@@ -6,8 +6,6 @@
 --
 -- 28/11/2020 : Version 1 : Redaction initiale Auteur : enamaryn
 
-commandArray = {}
-if devicechanged['TestShelly1'] then
     json = (loadfile "/opt/domoticz/scripts/lua/JSON.lua")()  -- For Linux    
     --  API call
     local config=assert(io.popen('curl "http://192.168.1.24/status"'))
@@ -24,6 +22,3 @@ if devicechanged['TestShelly1'] then
     print(SoftwareCurrent)
     print(SoftwareNew)
     print('SwitchHall is '..SwitchHallStatus)
-   
-end  
-return commandArray
