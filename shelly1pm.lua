@@ -7,31 +7,23 @@
 -- 28/11/2020 : Version 1 : Redaction initiale Auteur : enamaryn
 
 commandArray = {}
-json = (loadfile "/opt/domoticz/scripts/lua/JSON.lua")() -- on charge la bibliothèque JSON, URL pour un DOCKER domoticz
+if devicechanged['TestShelly1'] then
+    json = (loadfile "/opt/domoticz/scripts/lua/JSON.lua")()  -- For Linux    
+    --  API call
+    local config=assert(io.popen('curl "http://192.168.1.24/status"'))
+    local result = config:read('*a')
+    config:close()
+    output = json:decode(result)
 
-local config = assert(io.popen('/usr/bin/curl http://192.168.1.24/status'))
-local blocjson = config:read('*all')
-config:close()
-print (blocjson)
-
-local jsonValue = json:decode(blocjson)
-
-ip = jsonValue.ip
-power = jsonValue.power
---counters = jsonValue.counters
-temperature = jsonValue.temperature
-
-print (ip)
-print (power)
---print (counters)
-print (temperature)
--- vos shellys, on déclare chaque variable pour chaque dummy, exemele = power, counter, relay, temperature.. notamment
--- exemple Shelly1PM
---cumulus_1pm_power_idx=34
---cumulus_1pm_relay_idx=
---cumulus_1pm_counter_idx=
---cumulus_1pm_temperature_idx=
-
-
- -- nos instructions ici 
+    MyUptime= output.meters.power
+    SoftwareCurrent=output.update.old_version
+    SoftwareNew=output.update.new_version
+    SwitchHallStatus=output.relays[0].ison
+    
+    print(MyUptime)
+    print(SoftwareCurrent)
+    print(SoftwareNew)
+    print('SwitchHall is '..SwitchHallStatus)
+   
+end  
 return commandArray
