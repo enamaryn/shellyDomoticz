@@ -13,7 +13,7 @@
     config:close()
     output = json:decode(result)
 
-    MyUptime= output.meters.power
+    MyUptime=output.meters.power
     SoftwareCurrent=output.update.old_version
     SoftwareNew=output.update.new_version
     SwitchHallStatus=output.relays[0].ison
