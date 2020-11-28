@@ -9,21 +9,21 @@
 commandArray = {}
 json = (loadfile "/opt/domoticz/scripts/lua/JSON.lua")() -- on charge la bibliothèque JSON, URL pour un DOCKER domoticz
 
-local config=assert(io.popen('/usr/bin/curl http://192.168.1.24/status '))
+local config = assert(io.popen('/usr/bin/curl http://192.168.1.24/status'))
 local blocjson = config:read('*all')
 config:close()
 print (blocjson)
 
 local jsonValue = json:decode(blocjson)
 
-ip = jsonValye.ip
+ip = jsonValue.ip
 power = jsonValue.power
 --counters = jsonValue.counters
 temperature = jsonValue.temperature
 
 print (ip)
 print (power)
-print (counters)
+--print (counters)
 print (temperature)
 -- vos shellys, on déclare chaque variable pour chaque dummy, exemele = power, counter, relay, temperature.. notamment
 -- exemple Shelly1PM
