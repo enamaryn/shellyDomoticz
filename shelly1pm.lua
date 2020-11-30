@@ -17,3 +17,6 @@
 
 -- on update le capteur virtuel --
 	domoticz_updateDevice(idx,'',energieInstantanee)
+
+-- EN CREATION --
+-- code http pour passer de ON a OFF le relay http://192.168.0.40/relay/0?turn=toggle --
